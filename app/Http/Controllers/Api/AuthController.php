@@ -13,6 +13,24 @@ class AuthController extends Controller
     public function __construct(AuthService $authService) {
         $this->authService = $authService;
     }
+    
+    public function login(Request $request) {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        try {
+            $result = $this->authService->login($request->all());
+            return response()->json($result);    
+        } catch (\Exception $e) {
+            return  response()->json([
+                'message' => $e->getMessage()    
+            ], 401);
+        }
+        
+    }
+
     public function register(Request $request) {
         $request->validate([
             'name' => 'required',
@@ -26,4 +44,5 @@ class AuthController extends Controller
 
         return response()->json($result, 201);
     }
+
 }
