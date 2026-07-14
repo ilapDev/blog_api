@@ -43,4 +43,16 @@ class PostController extends Controller
 
         return response()->json($posts);
     }
+
+    public function myPosts(Request $request)
+    {
+        $posts = $this->postService->getMyPosts(
+            $request->all(),
+            $request->user()
+        );
+
+
+        return response()->json($posts);
+    }
+
 }
