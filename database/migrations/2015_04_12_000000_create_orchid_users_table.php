@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orchid_roles', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
+        Schema::table('users', function (Blueprint $table) {
+            $table->jsonb('permissions')->nullable();
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orchid_roles');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn(['permissions']);
+        });
     }
 };

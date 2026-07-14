@@ -11,10 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orchid_roles', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-        });
+       Schema::create('orchid_role_users', function (Blueprint $table) {
+
+        $table->integer('user_id');
+
+        $table->integer('role_id');
+
+        $table->primary([
+            'user_id',
+            'role_id'
+        ]);
+
+    });
     }
 
     /**
@@ -22,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orchid_roles');
+        Schema::dropIfExists('orchid_role_users');
     }
 };
