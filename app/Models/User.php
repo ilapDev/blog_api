@@ -10,16 +10,7 @@ use Orchid\Platform\Models\User as Authenticatable;
 class User extends Authenticatable
 {
 
-    protected static function booted()
-    {
-        static::creating(function ($user) {
-
-            if (!$user->role_id) {
-                $user->role_id = 1;
-            }
-
-        });
-    }
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -77,8 +68,5 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
+
 }

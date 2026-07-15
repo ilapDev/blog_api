@@ -2,17 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Orchid\Platform\Models\Role as OrchidRole;
 
-class Role extends Model
+class Role extends OrchidRole
 {
-    public $timestamps = false;
-
-    protected $fillable = [
-        'title'
-    ];
-
-    public function users() {
-        return $this->hasMany(User::class);
-    }
+    protected $table = 'orchid_roles';
 }
