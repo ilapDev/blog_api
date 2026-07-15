@@ -17,6 +17,8 @@ use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
+use App\Orchid\Screens\PostListScreen;
+use App\Orchid\Screens\PostEditScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -84,6 +86,15 @@ Route::screen('roles', RoleListScreen::class)
         ->parent('platform.index')
         ->push(__('Roles'), route('platform.systems.roles')));
 
+// Posts
+Route::screen('posts', PostListScreen::class)
+    ->name('platform.posts');
+
+Route::screen('posts/create', PostEditScreen::class)
+    ->name('platform.posts.create');
+
+Route::screen('posts/{post}/edit', PostEditScreen::class)
+    ->name('platform.posts.edit');
 // Example...
 Route::screen('example', ExampleScreen::class)
     ->name('platform.example')

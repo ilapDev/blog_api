@@ -2,17 +2,21 @@
 
 namespace App\Models;
 
+use Orchid\Screen\AsSource;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    use AsSource;
+
     protected $fillable = [
         'title',
         'text',
         'user_id'
     ];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }
