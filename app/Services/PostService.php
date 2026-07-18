@@ -11,7 +11,8 @@ class PostService
         $post = Post::create([
             'title' => $data['title'],
             'text' => $data['text'],
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'category_id' => $data['category_id'] ?? null
         ]);
 
         return $post;
@@ -27,11 +28,14 @@ class PostService
             $sort = 'created_at';
         }
         
-        return Post::with('user')
-            ->orderBy($sort, 'desc')
-            ->limit($limit)
-            ->offset($offset)
-            ->get();
+       return Post::with([
+            'user',
+            'category'
+        ])
+        ->orderBy($sort, 'desc')
+        ->limit($limit)
+        ->offset($offset)
+        ->get();
     }
 
     public function getMyPosts(array $params, $user)
@@ -44,7 +48,10 @@ class PostService
             $sort = 'created_at';
         }
 
-        $query = Post::where('user_id', $user->id);
+        $query = Post::with([
+                'category'
+            ])
+            ->where('user_id', $user->id);
 
         if (!empty($params['date_from'])) {
             $query->whereDate(
