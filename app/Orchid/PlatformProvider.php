@@ -77,7 +77,12 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.systems.roles')
                 ->permission('platform.systems.roles')
                 ->divider(),
-
+            Menu::make('Категории')
+                ->icon('bs.tags')
+                ->route('platform.categories'),
+            Menu::make('Posts')
+                ->icon('bs.file-text')
+                ->route('platform.posts'),
             Menu::make('Documentation')
                 ->title('Docs')
                 ->icon('bs.box-arrow-up-right')

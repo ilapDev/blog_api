@@ -19,6 +19,8 @@ use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use App\Orchid\Screens\PostListScreen;
 use App\Orchid\Screens\PostEditScreen;
+use App\Orchid\Screens\CategoryListScreen;
+use App\Orchid\Screens\CategoryEditScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -93,8 +95,28 @@ Route::screen('posts', PostListScreen::class)
 Route::screen('posts/create', PostEditScreen::class)
     ->name('platform.posts.create');
 
+Route::screen('categories', CategoryListScreen::class)
+    ->name('platform.categories');
+
+
+
+Route::screen('posts', PostListScreen::class)
+    ->name('platform.posts');
+
+
+Route::screen('posts/create', PostEditScreen::class)
+    ->name('platform.posts.create');
+
+
+    
 Route::screen('posts/{post}/edit', PostEditScreen::class)
     ->name('platform.posts.edit');
+
+Route::screen('categories/create', CategoryEditScreen::class)
+    ->name('platform.categories.create');
+
+Route::screen('categories/{category}/edit', CategoryEditScreen::class)
+    ->name('platform.categories.edit');
 // Example...
 Route::screen('example', ExampleScreen::class)
     ->name('platform.example')

@@ -13,7 +13,10 @@ class PostListScreen extends Screen
     public function query(): iterable
     {
         return [
-            'posts' => Post::paginate(),
+                'posts' => Post::with([
+                'user',
+                'category'
+            ])->paginate(),
         ];
     }
     public function name(): ?string

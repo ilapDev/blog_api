@@ -9,6 +9,8 @@ use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Support\Facades\Layout;
 use Illuminate\Http\Request;
+use Orchid\Screen\Fields\Relation;
+use App\Models\Category;
 
 class PostEditScreen extends Screen
 {
@@ -16,6 +18,8 @@ class PostEditScreen extends Screen
 
     public function query(Post $post): iterable
     {
+        $this->post = $post;
+
         return [
             'post' => $post,
         ];
@@ -49,6 +53,10 @@ class PostEditScreen extends Screen
                     ->title('Заголовок')
                     ->required(),
 
+                Relation::make('post.category_id')
+                    ->fromModel(Category::class, 'title')
+                    ->title('Категория'),
+
                 TextArea::make('post.text')
                     ->title('Текст')
                     ->rows(10)
@@ -69,6 +77,7 @@ class PostEditScreen extends Screen
         $post->fill([
             'title' => $request->input('post.title'),
             'text' => $request->input('post.text'),
+            'category_id' => $request->input('post.category_id'),
             'user_id' => auth()->id(),
         ]);
 

@@ -19,11 +19,13 @@ class PostListLayout extends Table
 
             TD::make('title', 'Заголовок'),
 
-            TD::make('user_id', 'Автор'),
+            TD::make('user.name', 'Автор'),
+
+            TD::make('category.title', 'Категория'),
 
             TD::make('created_at', 'Дата'),
 
-            TD::make('Действия')
+            TD::make('actions', 'Действия')
                 ->render(function (Post $post) {
 
                     return
