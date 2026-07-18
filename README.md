@@ -1,58 +1,225 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# National Blog API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Описание проекта
 
-## About Laravel
+**National Blog API** — это REST API для мобильного приложения блога. Система обеспечивает полное управление пользователями, публикациями и административными возможностями через интегрированную панель управления.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Платформа позволяет пользователям регистрироваться, выполнять авторизацию, создавать и просматривать публикации, а администраторы получают полный контроль над контентом и пользователями через интерфейс Orchid Platform. Проект ориентирован на создание надежного серверного решения с использованием современных PHP-технологий и управления базами данных.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Используемые технологии
 
-## Learning Laravel
+- **PHP 8.5** — Основной язык программирования
+- **Laravel 13** — PHP-фреймворк для разработки приложений
+- **MySQL 8.0** — Реляционная система управления базами данных
+- **Laravel Sanctum** — Аутентификация на основе API-токенов
+- **Orchid Platform** — Административный интерфейс и панель управления
+- **Composer** — Управление зависимостями
+- **REST API** — Архитектурный стиль для API-взаимодействия
+- **MVC Архитектура** — Шаблон проектирования Model-View-Controller
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Архитектура проекта
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+Проект построен по архитектуре Model-View-Controller (MVC) с четким разделением ответственности:
 
-## Agentic Development
+- **Models** — Работа с данными и связями базы данных
+- **Controllers** — Обработка входящих HTTP-запросов и формирование ответов
+- **Services** — Инкапсуляция бизнес-логики и рабочих процессов приложения
+- **Migrations** — Определение и управление версиями схемы базы данных
+- **Orchid Screens & Layouts** — Обеспечение работы административного интерфейса
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Такая архитектура обеспечивает поддерживаемый, тестируемый и расширяемый код благодаря правильному распределению ответственности между контроллерами и сервисами.
 
-```bash
-composer require laravel/boost --dev
+---
 
-php artisan boost:install
+## Реализованный функционал
+
+### Управление пользователями
+
+Система обеспечивает полный жизненный цикл пользователей:
+
+- Регистрация пользователей
+- Аутентификация и вход в систему
+- Генерация токенов доступа через Laravel Sanctum
+- Безопасная API-аутентификация
+
+---
+
+### Управление публикациями
+
+Реализован полный CRUD-функционал для постов:
+
+- Создание новых постов
+- Просмотр всех постов с информацией об авторе и категории
+- Редактирование существующих постов
+- Удаление постов
+- Просмотр собственных публикаций пользователя
+
+Каждый пост содержит следующие поля:
+
+- Заголовок
+- Текст
+- Автор
+- Дата создания
+- Категория
+
+---
+
+### Категории
+
+Добавлена система категорий для публикаций:
+
+- Создание категорий
+- Просмотр списка категорий
+- Редактирование категорий
+- Удаление категорий
+
+Связь между таблицами:
+Category 1 ---- N Post
+
+text
+
+Одна категория может содержать несколько публикаций.
+
+---
+
+## База данных
+
+Используется MySQL.
+
+### Основные таблицы:
+
+#### users
+Хранит информацию о пользователях:
+- id
+- name
+- email
+- password
+- role_id
+
+#### posts
+Хранит публикации:
+- id
+- title
+- text
+- user_id
+- category_id
+- created_at
+- updated_at
+
+#### categories
+Хранит категории:
+- id
+- title
+- created_at
+- updated_at
+
+---
+
+## Административная панель
+
+Для управления данными используется **Orchid Platform**.
+
+Администратор может:
+
+- Просматривать пользователей
+- Управлять постами
+- Управлять категориями
+- Создавать и редактировать записи
+
+Административная панель доступна по адресу:
+
+/admin
+
+## API маршруты
+
+### Регистрация пользователя
+
+### POST `/api/register`
+
+<img width="1920" height="1030" alt="api_post_postman" src="https://github.com/user-attachments/assets/9b2ea68d-090f-41cb-b634-734343c26d45" />
+
+Пример запроса:
+
+```json
+{
+    "name": "User",
+    "email": "user@mail.com",
+    "password": "password"
+}
 ```
+## Авторизация
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### POST /api/login
 
-## Contributing
+Возвращает токен доступа.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<img width="1920" height="1030" alt="api_post_postman_login" src="https://github.com/user-attachments/assets/56b6e7dc-2ade-465e-ac81-8a6db645942d" />
 
-## Code of Conduct
+## Получение всех постов
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### GET /api/posts
 
-## Security Vulnerabilities
+Возвращает список публикаций с информацией об авторе и категории.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+<img width="1920" height="986" alt="getpost(1)" src="https://github.com/user-attachments/assets/28b8499d-7511-475d-9a45-0e75ec4c27ce" />
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Создание поста
+
+### POST /api/posts
+
+<img width="1920" height="982" alt="create-post(1)" src="https://github.com/user-attachments/assets/8e4195ff-4ab2-4ad4-9fa2-0ab2bed1463e" />
+
+
+Требуется авторизация.
+
+Пример запроса:
+
+json
+{
+    "title": "Новый пост",
+    "text": "Текст публикации",
+    "category_id": 1
+}
+
+## Получение своих постов
+
+### GET /api/my-posts
+
+<img width="1920" height="981" alt="my-post" src="https://github.com/user-attachments/assets/df4dbe84-2300-47f9-baa3-1a69c47144a7" />
+
+
+Возвращает публикации текущего пользователя.
+
+
+## Скриншоты проекта
+
+## Административная панель Orchid && Список постов
+
+<img width="1920" height="978" alt="1" src="https://github.com/user-attachments/assets/0c90d81d-692c-4683-9ef9-51d13c5d5871" />
+
+## Редактирование поста
+
+<img width="1920" height="986" alt="2" src="https://github.com/user-attachments/assets/03f50ff1-7f69-4e5d-8950-6f9115d72f89" />
+
+## Создание поста
+
+<img width="1920" height="986" alt="3" src="https://github.com/user-attachments/assets/e5b93fb4-6435-4e65-a111-300088ed4b62" />
+
+## Категории
+
+<img width="1920" height="974" alt="4" src="https://github.com/user-attachments/assets/a32c66c6-be92-4f73-8c75-1987debeac4e" />
+
+
+## Создание категории
+
+<img width="1920" height="981" alt="5" src="https://github.com/user-attachments/assets/0865d5fb-f7de-4fa7-8ba2-b6fdcc3d40cb" />
+
+
+## Пример ответа API в Postman - все посты
+
+<img width="1920" height="1030" alt="6" src="https://github.com/user-attachments/assets/f0565651-189a-4da1-b735-fc6393832c3b" />
