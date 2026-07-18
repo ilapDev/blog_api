@@ -16,32 +16,23 @@ class PostListLayout extends Table
     {
         return [
             TD::make('id', 'ID'),
-
             TD::make('title', 'Заголовок'),
-
             TD::make('user.name', 'Автор'),
-
             TD::make('category.title', 'Категория'),
-
             TD::make('created_at', 'Дата'),
-
             TD::make('actions', 'Действия')
                 ->render(function (Post $post) {
-
                     return
-                        Link::make('✏')
+                        Link::make('Edit')
                             ->route('platform.posts.edit', $post->id)
                             ->class('btn btn-sm btn-primary')
-                            ->render()
-                        .
-                        ' ' .
-                        Button::make('🗑')
+                            ->render() .' ' .
+                        Button::make('Delete')
                             ->method('remove', [
                                 'post' => $post->id
                             ])
                             ->class('btn btn-sm btn-danger')
                             ->render();
-
                 }),
         ];
     }

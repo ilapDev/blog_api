@@ -20,6 +20,7 @@ class AuthService {
             'access_token' => $token
         ];
     }
+    
     public function register(array $data) {
         $user = User::create([
             'name' => $data['name'],
@@ -32,6 +33,4 @@ class AuthService {
             'user' => $user
         ];
     }
-
-   
 }

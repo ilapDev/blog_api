@@ -98,16 +98,11 @@ Route::screen('posts/create', PostEditScreen::class)
 Route::screen('categories', CategoryListScreen::class)
     ->name('platform.categories');
 
-
-
 Route::screen('posts', PostListScreen::class)
     ->name('platform.posts');
 
-
 Route::screen('posts/create', PostEditScreen::class)
     ->name('platform.posts.create');
-
-
     
 Route::screen('posts/{post}/edit', PostEditScreen::class)
     ->name('platform.posts.edit');

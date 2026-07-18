@@ -10,21 +10,16 @@ use Orchid\Screen\Screen;
 
 class CategoryListScreen extends Screen
 {
-
     public function query(): iterable
     {
         return [
             'categories' => Category::paginate(),
         ];
     }
-
-
     public function name(): ?string
     {
         return 'Категории';
     }
-
-
     public function commandBar(): iterable
     {
         return [
@@ -32,16 +27,12 @@ class CategoryListScreen extends Screen
                 ->route('platform.categories.create'),
         ];
     }
-
-
     public function layout(): iterable
     {
         return [
             CategoryListLayout::class,
         ];
     }
-
-
     public function remove(Request $request)
     {
         Category::findOrFail($request->get('category'))->delete();

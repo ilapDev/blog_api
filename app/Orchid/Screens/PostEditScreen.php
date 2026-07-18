@@ -15,7 +15,6 @@ use App\Models\Category;
 class PostEditScreen extends Screen
 {
     public $post;
-
     public function query(Post $post): iterable
     {
         $this->post = $post;
@@ -24,14 +23,10 @@ class PostEditScreen extends Screen
             'post' => $post,
         ];
     }
-
-
     public function name(): ?string
     {
         return 'Редактирование поста';
     }
-
-
     public function commandBar(): iterable
     {
         return [
@@ -43,8 +38,6 @@ class PostEditScreen extends Screen
                 ->canSee($this->post?->exists),
         ];
     }
-
-
     public function layout(): iterable
     {
         return [
@@ -65,14 +58,12 @@ class PostEditScreen extends Screen
         ];
     }
 
-
     public function save(Request $request, Post $post)
     {
         $request->validate([
             'post.title' => 'required',
             'post.text' => 'required',
         ]);
-
 
         $post->fill([
             'title' => $request->input('post.title'),
@@ -83,16 +74,12 @@ class PostEditScreen extends Screen
 
         $post->save();
 
-
         return redirect()
             ->route('platform.posts');
     }
-
-
     public function remove(Post $post)
     {
         $post->delete();
-
         return redirect()
             ->route('platform.posts');
     }

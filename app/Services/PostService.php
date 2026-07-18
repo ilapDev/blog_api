@@ -28,7 +28,7 @@ class PostService
             $sort = 'created_at';
         }
         
-       return Post::with([
+        return Post::with([
             'user',
             'category'
         ])

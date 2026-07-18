@@ -9,20 +9,18 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     private PostService $postService;
-
-
     public function __construct(PostService $postService)
     {
         $this->postService = $postService;
     }
-
 
     // Создание поста
     public function create(Request $request)
     {
         $request->validate([
             'title' => 'required',
-            'text' => 'required'
+            'text' => 'required',
+            'category_id' => 'nullable|exists:categories,id'
         ]);
 
         $post = $this->postService->create(
@@ -32,7 +30,6 @@ class PostController extends Controller
 
         return response()->json($post, 201);
     }
-
 
     // Получение всех постов
     public function index(Request $request)
@@ -51,8 +48,6 @@ class PostController extends Controller
             $request->user()
         );
 
-
         return response()->json($posts);
     }
-
 }

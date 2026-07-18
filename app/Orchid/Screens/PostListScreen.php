@@ -23,7 +23,6 @@ class PostListScreen extends Screen
     {
         return 'Посты';
     }
-
     public function commandBar(): iterable
     {
         return [
@@ -31,7 +30,6 @@ class PostListScreen extends Screen
                 ->route('platform.posts.create'),
         ];
     }
-
     public function layout(): iterable
     {
         return [
